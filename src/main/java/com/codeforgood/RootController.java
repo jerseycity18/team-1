@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.codeforgood;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 @org.springframework.web.bind.annotation.RestController
 @ImportResource("classpath:appcontext-config.xml")
-public class DemoApplication {
+public class RootController {
 
 	@RequestMapping("/")
 	@ResponseBody
@@ -24,7 +24,7 @@ public class DemoApplication {
 		return new test();
 	}
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(RootController.class, args);
 	}
 	class test{
 		private String m="v";
