@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ImportResource("classpath:appcontext-config.xml")
 public class RootController {
 
-	@RequestMapping("/")
-	@ResponseBody
-	String home() {
-		return "Hello World!";
-	}
+//	@RequestMapping("/")
+//	@ResponseBody
+//	String home() {
+//		return "Hello World!";
+//	}
 
 	@RequestMapping("/listBuddies")
 	@ResponseBody
