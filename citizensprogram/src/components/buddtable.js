@@ -1,29 +1,36 @@
 import React, { Component } from 'react';
 import { Table, Button, Model } from 'antd';
 import { Modal } from 'antd';
-import axios from 'axios';
 
-// const data = [{
-//   key: '1',
-//   name: 'John Brown',
-//   age: 32,
-//   address: 'New York No. 1 Lake Park',
-// }, {
-//   key: '2',
-//   name: 'Jim Green',
-//   age: 42,
-//   address: 'London No. 1 Lake Park',
-// }, {
-//   key: '3',
-//   name: 'Joe Black',
-//   age: 32,
-//   address: 'Sidney No. 1 Lake Park',
-// }, {
-//   key: '4',
-//   name: 'Jim Red',
-//   age: 32,
-//   address: 'London No. 2 Lake Park',
-// }];
+const data = [{
+  key: '1',
+  name: 'John Brown',
+  gender: 'M',
+  age: 32,
+  email: 'john@gmail.com',
+  phone: 2015552222
+}, {
+  key: '2',
+  name: 'Jim Green',
+  gender: 'M',
+  age: 42,
+  email: 'jim@gmail.com',
+  phone: 2015553333
+}, {
+  key: '3',
+  name: 'Joe Black',
+  gender: 'M',
+  age: 32,
+  email: 'john@gmail.com',
+  phone: 2015554444
+}, {
+  key: '4',
+  name: 'Jane',
+  gender: 'F',
+  age: 32,
+  email: 'john@gmail.com',
+  phone: 2015553333
+}];
 
 class Buddtable extends React.Component {
   state = {
@@ -36,17 +43,6 @@ class Buddtable extends React.Component {
       filteredInfo: filters,
       sortedInfo: sorter,
     });
-  }
-  getBuddy= () => {
-    axios.get('http://www.mocky.io/v2/5adb87643100006600233bac')
-  .then(function (response) {
-    console.log(response.data);
-    return response.data;
-
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
   }
   clearFilters = () => {
     this.setState({ filteredInfo: null });
@@ -84,14 +80,13 @@ class Buddtable extends React.Component {
     });
   }
   render() {
-    this.getBuddy()
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
     filteredInfo = filteredInfo || {};
     const columns = [{
       title: 'Name',
-      dataIndex: 'Name',
-      key: 'Name',
+      dataIndex: 'name',
+      key: 'name',
       filters: [
         { text: 'Joe', value: 'Joe' },
         { text: 'Jim', value: 'Jim' },
@@ -100,34 +95,38 @@ class Buddtable extends React.Component {
       onFilter: (value, record) => record.name.includes(value),
       sorter: (a, b) => a.name.length - b.name.length,
       sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-    }, {
-      title: 'Age',
-      dataIndex: 'Age',
-      key: 'Age',
-      sorter: (a, b) => a.age - b.age,
-      sortOrder: sortedInfo.columnKey === 'age' && sortedInfo.order,
-    }, {
-      title: 'Address',
-      dataIndex: 'Address',
-      key: 'Address',
-      filters: [
-        { text: 'London', value: 'London' },
-        { text: 'New York', value: 'New York' },
-      ],
-      filteredValue: filteredInfo.address || null,
-      onFilter: (value, record) => record.address.includes(value),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
+    },
+	{
+      title: 'gender',
+      dataIndex: 'gender',
+      key: 'gender'
     },
     {
-    	title: 'Action',
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+      sorter: (a, b) => a.age - b.age,
+      sortOrder: sortedInfo.columnKey === 'age' && sortedInfo.order,
+    },
+	{
+      title: 'email',
+      dataIndex: 'email',
+      key: 'email'
+    },
+	{
+      title: 'phone',
+      dataIndex: 'phone',
+      key: 'phone'
+    },
+    {
+    	title: 'Match',
     	dataIndex: '',
     	key: 'x',
     	render: () =>
     		<div>
         		<Button type="primary" onClick={this.showModal}>Match Buddies</Button>
 		        <Modal
-		          title="Basic Modal"
+		          title="Match Peer Buddies"
 		          visible={this.state.visible}
 		          onOk={this.handleOk}
 		          onCancel={this.handleCancel}
@@ -146,7 +145,7 @@ class Buddtable extends React.Component {
           <Button onClick={this.clearFilters}>Clear filters</Button>
           <Button onClick={this.clearAll}>Clear filters and sorters</Button>*/}
         </div>
-        <Table columns={columns} dataSource={this.getBuddy()} onChange={this.handleChange} />
+        <Table columns={columns} dataSource={data} onChange={this.handleChange} />
       </div>
     );
   }

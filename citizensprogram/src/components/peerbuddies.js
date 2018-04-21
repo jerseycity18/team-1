@@ -4,10 +4,79 @@ import { Modal } from 'antd';
 
 const data = [{
   key: '1',
-  name: 'peer buddies',
+  name: 'Jeef',
+  gender: 'M',
   age: 32,
+  Interests: 'Movies, Singing, Baseball',
+  email: 'Jeff@gmail.com',
   address: 'New York No. 1 Lake Park',
+  phone: '201225552',
 }];
+
+const volundata = [{
+  key: '1',
+  rank: 1,
+  name: 'Mike',
+  age: 19,
+  address: '10 Downing Street',
+  match: '90%',
+  wait: '100 days',
+  proximity: '3 miles'
+},
+{
+  key: '2',
+  rank: 2,
+  name: 'Janet',
+  age: 45,
+  address: '40 Newport Parkway',
+  match: '75%',
+  wait: '40 days',
+  proximity: '4 miles'
+},
+{
+  key: '1',
+  rank: 3,
+  name: 'Jack',
+  age: 32,
+  address: '30 Newport Parkway',
+  match: '70%',
+  wait: '30 days',
+  proximity: '5 miles'
+}
+];
+
+const voluncolumns = [
+{
+  title: 'Rank',
+  dataIndex: 'rank',
+  key: 'rank',
+},
+{
+  title: 'Name',
+  dataIndex: 'name',
+  key: 'name',
+}, {
+  title: 'Age',
+  dataIndex: 'age',
+  key: 'age',
+}, {
+  title: 'Address',
+  dataIndex: 'address',
+  key: 'address',
+}, {
+  title: 'Match',
+  dataIndex: 'match',
+  key: 'match',
+},{
+  title: 'Wait',
+  dataIndex: 'wait',
+  key: 'wait',
+},{
+  title: 'Proximity',
+  dataIndex: 'proximity',
+  key: 'proximity',
+}
+];
 
 class Peerbuddies extends React.Component {
   state = {
@@ -72,7 +141,12 @@ class Peerbuddies extends React.Component {
       onFilter: (value, record) => record.name.includes(value),
       sorter: (a, b) => a.name.length - b.name.length,
       sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-    }, {
+    },
+    {
+      title: 'gender',
+      dataIndex: 'gender',
+      key: 'gender'},
+    {
       title: 'Age',
       dataIndex: 'age',
       key: 'age',
@@ -91,22 +165,26 @@ class Peerbuddies extends React.Component {
       sorter: (a, b) => a.address.length - b.address.length,
       sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
     },
-    { 
-    	title: 'Action', 
-    	dataIndex: '', 
-    	key: 'x', 
-    	render: () => 
+    {
+    	title: 'Match',
+    	dataIndex: '',
+    	key: 'x',
+    	render: () =>
     		<div>
-        		<Button type="primary" onClick={this.showModal}>Match Buddies</Button>
+        		<Button type="primary" onClick={this.showModal}>Match Peer Buddies</Button>
 		        <Modal
-		          title="Basic Modal"
+		          title="Jeff "
 		          visible={this.state.visible}
 		          onOk={this.handleOk}
 		          onCancel={this.handleCancel}
+              width="80vw"
 		        >
-		          <p>Some contents...</p>
-		          <p>Some contents...</p>
-		          <p>Some contents...</p>
+              <div><b>Age: 32</b></div>
+              <div><b>Interests: Movies, Singing, Baseball</b></div>
+              <div><b>Address: 'New York No. 1 Lake Park'</b></div>
+              <div><b>Poximity: 5 miles</b></div><br/>
+              <Table dataSource={volundata} columns={voluncolumns} />
+              <img src="https://www.gens1.com/janet/Picture1.png" style={{width:"75%", marginLeft:"12.5%"}}/>
 		        </Modal>
 		      </div>
     },
